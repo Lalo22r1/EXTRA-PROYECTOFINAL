@@ -1,0 +1,736 @@
+PROGRAMACION EN WINDOWS:
+•---------------------------------------------------------	FORM EMPLEADO… 
+
+Public Class ABC_Empleados
+    Private Sub B_CancelarE_Click(sender As Object, e As EventArgs) Handles B_CancelarE.Click
+        Me.Close()
+        MenuPrincipal.Show()
+    End Sub
+
+    Private Sub B_agg_Click(sender As Object, e As EventArgs) Handles B_agg.Click
+        c.Open()
+        'Dim fechareal
+        'fechareal = txtFecha.Text
+        'fechareal = String.Format(System.DateTime.Now, "MM/dd/yyyy")
+        'MsgBox(fechareal)
+        'mes,dia y año
+        cmd = New SqlClient.SqlCommand("AgregarEmpleados2 ", c)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@NombreE", E_Nombre.Text)
+        cmd.Parameters.AddWithValue("@APPE", E_APP.Text)
+        cmd.Parameters.AddWithValue("@APME", E_APM.Text)
+        cmd.Parameters.AddWithValue("@fechaN", E_FECHAN.Text)
+        cmd.Parameters.AddWithValue("@Activo", E_activo.Text)
+        cmd.Parameters.AddWithValue("@TelefonoE", E_TELEFONO.Text)
+        cmd.Parameters.AddWithValue("@DireccionE", E_Direccion.Text)
+        cmd.Parameters.AddWithValue("@EdadE", E_Empleado.Text)
+        cmd.ExecuteNonQuery()
+        MsgBox("Empleado Registrado Corractamente")
+        c.Close()
+    End Sub
+
+    Private Sub B_Modificar_Click(sender As Object, e As EventArgs) Handles B_Modificar.Click
+        c.Open()
+        'Dim fechareal
+        'fechareal = txtFecha.Text
+        'fechareal = String.Format(System.DateTime.Now, "MM/dd/yyyy")
+        'MsgBox(fechareal)
+        'mes,dia y año
+        cmd = New SqlClient.SqlCommand("ModificarEmpleados", c)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@NombreE", E_Nombre.Text)
+        cmd.Parameters.AddWithValue("@APPE", E_APP.Text)
+        cmd.Parameters.AddWithValue("@APME", E_APM.Text)
+        cmd.Parameters.AddWithValue("@fechaN", E_FECHAN.Text)
+        cmd.Parameters.AddWithValue("@Activo", E_activo.Text)
+        cmd.Parameters.AddWithValue("@TelefonoE", E_TELEFONO.Text)
+        cmd.Parameters.AddWithValue("@DireccionE", E_Direccion.Text)
+        cmd.Parameters.AddWithValue("@EdadE", E_Empleado.Text)
+        cmd.ExecuteNonQuery()
+        MsgBox("Empleado Modificado Corractamente")
+        c.Close()
+    End Sub
+
+    Private Sub B_nuevo_Click(sender As Object, e As EventArgs) Handles B_nuevo.Click
+        E_activo.Clear()
+        E_APM.Clear()
+
+        E_APP.Clear()
+
+        E_Direccion.Clear()
+
+        E_Empleado.Clear()
+
+        E_FECHAN.Clear()
+
+        E_Nombre.Clear()
+
+        E_TELEFONO.Clear()
+    End Sub
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+End Class
+
+•-----------------------------------------------------------------------------	FORM PROVEDOR…
+Public Class ABC_Provedor
+    Private Sub B_agg_Click(sender As Object, e As EventArgs) Handles B_agg.Click
+        c.Open()
+        'Dim fechareal
+        'fechareal = txtFecha.Text
+        'fechareal = String.Format(System.DateTime.Now, "MM/dd/yyyy")
+        'MsgBox(fechareal)
+        'mes,dia y año
+        cmd = New SqlClient.SqlCommand("AgregarProveedor", c)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@NombreProveedor", t_nombreP.Text)
+        cmd.Parameters.AddWithValue("@DireccionProveedor ", t_direccionp.Text
+                                   )
+        cmd.Parameters.AddWithValue("@TelefonoProveedor", t_telep.Text)
+        cmd.Parameters.AddWithValue("@FechaEntrega", t_fechap.Text)
+        cmd.ExecuteNonQuery()
+        MsgBox("Proveedor Registrado Corractamente")
+        LimpiarV()
+        c.Close()
+    End Sub
+    Public Sub LimpiarV()
+        t_nombreP.Clear()
+        t_direccionp.Clear()
+        t_fechap.Clear()
+        t_telep.Clear()
+    End Sub
+    Private Sub B_nuevo_Click(sender As Object, e As EventArgs) Handles B_nuevo.Click
+        LimpiarV()
+    End Sub
+
+    Private Sub B_CancelarP_Click(sender As Object, e As EventArgs) Handles B_CancelarP.Click
+        MessageBox.Show("Cancelar Registro Proveedor")
+        Me.Close()
+    End Sub
+
+    Private Sub B_Modificar_Click(sender As Object, e As EventArgs) Handles B_Modificar.Click
+        c.Open()
+        cmd = New SqlClient.SqlCommand("ModificarProveedor", c)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@nombreP", t_nombreP.Text)
+        cmd.Parameters.AddWithValue("@DireccionP ", t_direccionp.Text
+                                   )
+        cmd.Parameters.AddWithValue("@TelefonoP", t_telep.Text)
+        cmd.Parameters.AddWithValue("@fechaE", t_fechap.Text)
+        cmd.ExecuteNonQuery()
+        MsgBox("Proveedor Modificado Corractamente")
+        LimpiarV()
+        c.Close()
+    End Sub
+End Class
+
+
+•----------------------------------------------------------------------------------------------	FORM AGREGAR MEDICAMENTO
+
+Public Class AgregarMedicamento
+    Private Sub Limpiar()
+        tbx_nmedica.Clear()
+        tbx_ndesc.Clear()
+        txt_ncant.Clear()
+        txt_ncontrol.Clear()
+        txt_ncosto.Clear()
+        txtFecha.Clear()
+    End Sub
+    Private Sub Btn_AgregarM_Click(sender As Object, e As EventArgs) Handles Btn_AgregarM.Click
+        c.open()
+        'Dim fechareal
+        'fechareal = txtFecha.Text
+        'fechareal = String.Format(System.DateTime.Now, "MM/dd/yyyy")
+        'MsgBox(fechareal)
+        'mes,dia y año
+        cmd = New SqlClient.SqlCommand("RegistroMedicamento", c)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@nombreMedicamento", tbx_nmedica.Text)
+        cmd.Parameters.AddWithValue("@descripcionM ", tbx_ndesc.Text)
+        cmd.Parameters.AddWithValue("@CantidadM", txt_ncant.Text)
+        cmd.Parameters.AddWithValue("@fechaV", txtFecha.Text)
+        cmd.Parameters.AddWithValue("@Control", txt_ncontrol.Text)
+        cmd.Parameters.AddWithValue("@CostoMedicamento", txt_ncosto.Text)
+        cmd.ExecuteNonQuery()
+        MsgBox("Medicamento Registrado Corractamente")
+        limpiar()
+        c.Close()
+    End Sub
+    Private Sub btn_NvoA_Click(sender As Object, e As EventArgs) Handles btn_NvoA.Click
+        tbx_nmedica.Clear()
+        tbx_ndesc.Clear()
+        txt_ncant.Clear()
+        txt_ncontrol.Clear()
+        txt_ncosto.Clear()
+    End Sub
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        c.Open()
+        'Dim fechareal
+        'fechareal = txtFecha.Text
+        'fechareal = String.Format(System.DateTime.Now, "MM/dd/yyyy")
+        'MsgBox(fechareal)
+        'mes,dia y año
+        cmd = New SqlClient.SqlCommand("ModificarMedicamentos", c)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.AddWithValue("@nombreM", tbx_nmedica.Text)
+        cmd.Parameters.AddWithValue("@descripcionMedicamento ", tbx_ndesc.Text)
+        cmd.Parameters.AddWithValue("@cantidadMedicamento", txt_ncant.Text)
+        cmd.Parameters.AddWithValue("@fechaV", txtFecha.Text)
+        cmd.Parameters.AddWithValue("@ControlMedicamento", txt_ncontrol.Text)
+        cmd.Parameters.AddWithValue("@CMedicamento", txt_ncosto.Text)
+        cmd.ExecuteNonQuery()
+        MsgBox("Medicamento Editado Corractamente")
+        MenuPrincipal.Medicamento()
+        Limpiar()
+        c.Close()
+    End Sub
+End Class
+
+•------------------------------------------	FORM PRESENTACION
+Public Class frmPresentacion
+    Private Sub frmPresentacion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+
+        Timer1.Start()
+        Me.Hide()
+        Login.Show()
+    End Sub
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        ProgressBarPresentacion.Increment(20)
+        'Porciento.Text = ProgressBarPresentacion.Value
+    End Sub
+
+    Private Sub ProgressBarPresentacion_Click(sender As Object, e As EventArgs) Handles ProgressBarPresentacion.Click
+    End Sub
+End Class
+
+
+•	----------------------------------------- FORM LOGIN
+Public Class Login
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Try
+            Dim dts As New datos
+            Dim funciones As New funcion
+            'dts.gusuario = Me.txtuser.Text
+            dts.gcontraseña = Me.txtpassword.Text
+            dts.gusuario = Me.txtuser.Text
+            'If funciones.validar(dts) = True Then
+            'Timer1.Start()
+            'Dim fr As New MenuPrincipal
+            'MessageBox.Show("Bienvenido al Sistema " & txtuser.Text)
+            'fr.Show()
+            'Me.Hide()
+            If funciones.validar(dts) = True Then
+                txtuser.Text = True
+                txtuser.Clear()
+                Timer1.Start()
+                Dim fr As New MenuPrincipal
+                MessageBox.Show("Bienvenido al Sistema " + txtuser.Text)
+
+                fr.Show()
+                Me.Hide()
+            Else
+                MessageBox.Show("Usuario No Valido", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Me.txtuser.Clear()
+                Me.txtpassword.Clear()
+                Me.txtuser.Focus()
+            End If
+            'Else
+            'MessageBox.Show("Datos Incorrectos", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ' Me.txtuser.Clear()
+            'Me.txtpassword.Clear()
+            'Me.txtuser.Focus()
+
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        ProgressBar1.Increment(15)
+        If ProgressBar1.Value = 100 Then
+            Timer1.Enabled = False
+            Me.Hide()
+        End If
+    End Sub
+    Private Sub txtpassword_TextChanged(sender As Object, e As EventArgs) Handles txtpassword.TextChanged
+        txtpassword.PasswordChar = "*"
+    End Sub
+    Private Sub btn_Cancelar_Click(sender As Object, e As EventArgs) Handles btn_Cancelar.Click
+        ' Me.txtpassword.Text = ""
+        ' Me.txtuser.Text = ""
+        Me.Close()
+    End Sub
+    Private Sub Button1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Button1.KeyPress
+        Try
+            Dim dts As New datos
+            Dim funciones As New funcion
+            'dts.gusuario = Me.txtuser.Text
+            dts.gcontraseña = Me.txtpassword.Text
+            dts.gusuario = Me.txtuser.Text
+            'If funciones.validar(dts) = True Then
+            'Timer1.Start()
+            'Dim fr As New MenuPrincipal
+            'MessageBox.Show("Bienvenido al Sistema " & txtuser.Text)
+            'fr.Show()
+            'Me.Hide()
+            If funciones.validar(dts) = True Then
+                txtuser.Text = True
+                txtuser.Clear()
+                Timer1.Start()
+                Dim fr As New MenuPrincipal
+                MessageBox.Show("Bienvenido al Sistema " & txtuser.Text)
+
+                fr.Show()
+                Me.Hide()
+            Else
+                MessageBox.Show("Usuario No Valido", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Me.txtuser.Clear()
+                Me.txtpassword.Clear()
+                Me.txtuser.Focus()
+            End If
+            'Else
+            'MessageBox.Show("Datos Incorrectos", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            'Me.txtuser.Clear()
+            'Me.txtpassword.Clear()
+            'Me.txtuser.Focus()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+End Class
+
+
+
+•	-------------------------------------FORM MENU
+
+Imports System.Data.SqlClient
+Imports System.Data
+Public Class MenuPrincipal
+    Dim cadena As String = "Data Source=LAPTOP-CFDIFQP4\SQLEXPRESS01;" & "Initial Catalog=Farmacia_Proyecto;" & "Integrated Security= true"
+    Dim varconexion As New SqlConnection()
+    Public Sub Medicamento()
+        varconexion = New SqlConnection(cadena)
+        varconexion.Open()
+        Dim da As New SqlDataAdapter("select nombreMedicamento,descripcionM,cantidadM, fechavencimiento, costoMedicamento, controlM   from medicamento ", varconexion)
+        Dim dt As New DataTable
+        da.Fill(dt)
+        DGV1.DataSource = dt
+        DGV1.Visible = True
+        txb_Buscar.Clear()
+        Btn_OpcionMed.Visible = True
+        btn_Buscar.Visible = True
+        txb_Buscar.Visible = True
+        letBusc.Visible = True
+    End Sub
+    Private Sub btnRegresar_Click_1(sender As Object, e As EventArgs) Handles btnRegresar.Click
+        Dim fr As New Login
+        fr.Show()
+        Me.Close()
+    End Sub
+    Private Sub btnInventario_Click(sender As Object, e As EventArgs) Handles btnInventario.Click
+        Medicamento()
+    End Sub
+
+    Public Sub Provedores()
+        varconexion = New SqlConnection(cadena)
+        varconexion.Open()
+        Dim da As New SqlDataAdapter("select nombreP,DireccionP,TelefonoP,FechaEntrega from Proveedores", varconexion)
+        Dim dt As New DataTable
+        da.Fill(dt)
+        DGV1.DataSource = dt
+        DGV1.Visible = True
+        txb_Buscar.Clear()
+        Bnt_BuscProv.Visible = True
+        btn_OpcionP.Visible = True
+        txb_Buscar.Visible = True
+        letBusc.Visible = True
+    End Sub
+    Private Sub btnProveedores_Click_1(sender As Object, e As EventArgs) Handles btnProveedores.Click
+        Provedores()
+    End Sub
+    Private Sub btnPuntoVenta_Click(sender As Object, e As EventArgs) Handles btnPuntoVenta.Click
+        PuntoVenta.Show()
+        Me.Close()
+    End Sub
+    Private Sub btn_Buscar_Click(sender As Object, e As EventArgs) Handles btn_Buscar.Click
+        Dim da = New SqlDataAdapter("select nombreMedicamento, descripcionM ,cantidadM,fechavencimiento, costoMedicamento from Medicamento where nombreMedicamento like '" + txb_Buscar.Text + "%'", cadena)
+        Dim dt = New DataTable
+        da.Fill(dt)
+        DGV1.DataSource = dt
+    End Sub
+    Private Sub Bnt_BuscProv_Click(sender As Object, e As EventArgs) Handles Bnt_BuscProv.Click
+        Dim bu2 = New SqlDataAdapter("select nombreP,DireccionP,TelefonoP,fechaEntrega from Proveedores where nombreP  like '%" + txb_Buscar.Text + "%'", cadena)
+        Dim dt = New DataTable
+        bu2.Fill(dt)
+        DGV1.DataSource = dt
+    End Sub
+    Private Sub Btn_Agregar_Click(sender As Object, e As EventArgs) Handles Btn_OpcionMed.Click
+        AgregarMedicamento.Show()
+    End Sub
+    Private Sub btn_OpcionP_Click(sender As Object, e As EventArgs) Handles btn_OpcionP.Click
+        ABC_Provedor.Show()
+    End Sub
+    Private Sub btn_empleados_Click(sender As Object, e As EventArgs) Handles btn_empleados.Click
+        DGV1.Visible = False
+        btn_Buscar.Visible = False
+        Btn_OpcionMed.Visible = False
+        btn_OpcionP.Visible = False
+        ABC_Empleados.Show()
+        Me.Hide()
+    End Sub
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+        Me.Close()
+    End Sub
+
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Reportes.Show()
+        Me.Close()
+    End Sub
+End Class
+•	--------------------------------------------------FORM VENTA 
+Imports System.Data.SqlClient
+Imports System.Data
+Public Class PuntoVenta
+    Dim cadena As String = "Data Source=LAPTOP-CFDIFQP4\SQLEXPRESS01;" & "Initial Catalog=Farmacia_Proyecto;" & "Integrated Security= true"
+    Dim varconexion As New SqlConnection()
+    Dim Tcamb, tPag, precio, suma, recibe As Double
+    Dim Op, id
+    Dim fechav As String
+    Dim cambio
+    Dim id_medicamento
+    Public Sub realizarVenta()
+        tPag = tbx_TotalP.Text
+        recibe = tbx_Recibir.Text
+        Tcamb = recibe - tPag
+    End Sub
+    Sub ListaDatos()
+        Try
+            Dim cmd As New SqlCommand
+            cmd.Connection = varconexion
+            cmd.CommandText = "verMedicamento"
+            cmd.CommandType = CommandType.StoredProcedure
+            Dim da As New SqlDataAdapter(cmd)
+            da.SelectCommand.CommandType = CommandType.StoredProcedure
+            Dim ds As New DataSet
+            da.Fill(ds, "consulta")
+            DProducto.DataSource = ds.Tables("consulta")
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    Private Sub txb_Producto_TextChanged(sender As Object, e As EventArgs) Handles txb_Producto.TextChanged
+        'If txb_Producto.Text <> "" Then
+        '  Try
+        ' Dim cmd As New SqlCommand
+        ' cmd.Connection = varconexion
+        ' cmd.CommandText = "buscarMedicamento"
+        '  cmd.CommandType = CommandType.StoredProcedure
+        '  cmd.Parameters.AddWithValue("@NMedicamento", txb_Producto)
+        '  Dim da As New SqlDataAdapter(cmd)
+        '  da.SelectCommand.CommandType = CommandType.StoredProcedure
+        '  Dim ds As New DataSet
+        '   da.Fill(ds, "")
+        '   DProducto.DataSource = ds.Tables("")
+        '   Catch ex As Exception
+        '      MsgBox(ex.Message)
+
+        '   End Try
+        '         Else
+        '       ListaDatos()
+        ' End If
+    End Sub
+    Public Sub PuntoVenta_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        Dim da = New SqlDataAdapter("select nombreMedicamento, descripcionM ,cantidadM,fechavencimiento, costoMedicamento from Medicamento", cadena)
+        Dim dt = New DataTable
+        da.Fill(dt)
+        DProducto.DataSource = dt
+        Label1.Text = DateTime.Now.ToShortDateString
+        MsgBox(Label1.Text)
+        fechav = Label1.Text
+        CantidadTb.Text = "1"
+    End Sub
+
+    Public Sub txb_Producto_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txb_Producto.KeyPress
+        LlamarProductos()
+    End Sub
+    Public Sub LlamarProductos()
+        Dim da = New SqlDataAdapter("select nombreMedicamento, descripcionM ,cantidadM,fechavencimiento, costoMedicamento from Medicamento where nombreMedicamento like '" + txb_Producto.Text + "%'", cadena)
+        Dim dt = New DataTable
+        da.Fill(dt)
+        DProducto.DataSource = dt
+
+    End Sub
+    'Private Sub DProducto_DoubleClick(sender As Object, e As EventArgs) Handles DProducto.DoubleClick
+    'Dim da = New SqlDataAdapter("Select nombreMedicamento, costoMedicamento from Medicamento", cadena)
+    'Dim dt = New DataTable
+    'da.Fill(dt)
+    'DataGridView1.DataSource = dt
+    'Dim nombreMedicamento, costoMedicamento As String
+    '  nombreMedicamento = DProducto(0, DProducto.CurrentRow.Index).Value
+    '   costoMedicamento = DProducto(1, DProducto.CurrentRow.Index).Value
+    '    DataGridView1.Rows.Add(nombreMedicamento, costoMedicamento)
+    ' End Sub
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        'Dim cambio
+        Dim nombreMedicamento, costoMedicamento, Desc As String
+        nombreMedicamento = DProducto(0, DProducto.CurrentRow.Index).Value
+        Desc = DProducto(1, DProducto.CurrentRow.Index).Value
+        costoMedicamento = DProducto(4, DProducto.CurrentRow.Index).Value
+        DataGridView1.Rows.Add(nombreMedicamento, Desc, CantidadTb.Text, costoMedicamento)
+        Op += Convert.ToDouble(CantidadTb.Text) * Convert.ToDouble(costoMedicamento.ToString)
+        tbx_TotalP.Text = Op.ToString
+        CantidadTb.Text = "1"
+    End Sub
+    Public Sub IdVenta()
+        c.Open()
+        If c.State = ConnectionState.Open Then
+            Query = "SELECT MAX (id_venta)as ventas From venta"
+            cmd = New SqlClient.SqlCommand(Query, c)
+            cmd.ExecuteNonQuery()
+            sqlread = cmd.ExecuteReader
+            While sqlread.Read
+                Id = sqlread("Ventas")
+            End While
+            sqlread.Close()
+        Else
+            MsgBox("Error de la conexion")
+        End If
+        c.Close()
+
+    End Sub
+    Private Sub Btn_Ventas_Click(sender As Object, e As EventArgs) Handles Btn_Ventas.Click
+
+        Dim respagar
+        Dim dts As New datos
+        If tbx_Recibir.Text = "" Then
+            MsgBox("Ingresa el monto de pago correspondiente")
+        ElseIf (tbx_Recibir.Text) < (tbx_TotalP.Text) Then
+            ' MsgBox("Cantidad Insuficiente, falta pagar")
+            respagar = Convert.ToDouble(tbx_TotalP.Text) - Convert.ToDouble(tbx_Recibir.Text)
+            MsgBox("Cantidad Insuficiente, falta pagar" + respagar.ToString)
+        ElseIf DataGridView1.Rows.Count >= 1 Then
+            c.Open()
+                cmd = New SqlClient.SqlCommand("RegistrarVenta2", c)
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.Parameters.AddWithValue("@total", Convert.ToDouble(tbx_TotalP.Text))
+            cmd.Parameters.AddWithValue("@fecha", fechav = String.Format(System.DateTime.Now, "MM/dd/yyyy"))
+            cmd.Parameters.AddWithValue("@idusuario", 1)
+            cmd.ExecuteNonQuery()
+            MsgBox("VENTA REGISTRADA CORRECTAMENTE")
+            'limpiar()
+            c.Close()
+                cambio = Convert.ToDouble(tbx_Recibir.Text) - Convert.ToDouble(tbx_TotalP.Text)
+            txb_Cambio.Text = cambio.ToString
+        End If
+        IdVenta()
+        For i = 0 To DataGridView1.Rows.Count - 2
+            c.Open()
+            Query = "Select id_Medicamento from Medicamento Where nombreMedicamento = '" & DataGridView1.Rows(i).Cells(0).Value.ToString & "'"
+            cmd = New SqlClient.SqlCommand(Query, c)
+            cmd.ExecuteNonQuery()
+            sqlread = cmd.ExecuteReader
+            While sqlread.Read
+                id_medicamento = (sqlread("id_Medicamento"))
+            End While
+            sqlread.Close()
+            cmd = New SqlClient.SqlCommand("RegistrarDetalleV", c)
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@id_venta", id)
+            cmd.Parameters.AddWithValue("@id_medicamento", id_medicamento)
+            cmd.Parameters.AddWithValue("@cantidad", DataGridView1.Rows(i).Cells(2).Value.ToString)
+            cmd.ExecuteNonQuery()
+
+            c.Close()
+        Next
+        ' dts.gusuario = Me.txtuser.Text
+    End Sub
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs)
+        Me.WindowState = FormWindowState.Maximized
+    End Sub
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+    End Sub
+    Private Sub tbx_Recibir_TextChanged(sender As Object, e As EventArgs) Handles tbx_Recibir.TextChanged
+    End Sub
+    Private Sub tbx_TotalP_TextChanged(sender As Object, e As EventArgs) Handles tbx_TotalP.TextChanged
+    End Sub
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs)
+        Me.Close()
+    End Sub
+    Private Sub Btn_NuevaV_Click(sender As Object, e As EventArgs) Handles Btn_NuevaV.Click
+        limpiar()
+        LlamarProductos()
+        'DataGridView1.Columns.Clear()
+        DataGridView1.Rows.Clear()
+    End Sub
+    Public Sub limpiar()
+        tbx_Recibir.Clear()
+        tbx_Recibir.Clear()
+        txb_Cambio.Clear()
+        txb_Producto.Clear()
+        tbx_TotalP.Clear()
+        LlamarProductos()
+    End Sub
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Btn_Regresar.Click
+        MenuPrincipal.Show()
+        Me.Close()
+    End Sub
+    Private Sub Btn_Cancelar_Click(sender As Object, e As EventArgs) Handles Btn_Cancelar.Click
+        'MsgBox 'Venta Cancelada'
+        MessageBox.Show("Venta Cancelada")
+        limpiar()
+        DataGridView1.Rows.Clear()
+    End Sub
+End Class
+•------------------------------------------------------------	FORM REPORTES 
+Public Class Reportes
+    Private Sub btnMedicamentos_Click(sender As Object, e As EventArgs) Handles btnMedicamentos.Click
+        Form1.Show()
+        MenuPrincipal.Close()
+
+    End Sub
+
+    Private Sub BtnProveedores_Click(sender As Object, e As EventArgs) Handles BtnProveedores.Click
+        Form2.Show()
+        MenuPrincipal.Close()
+    End Sub
+
+    Private Sub btnVentas_Click(sender As Object, e As EventArgs) Handles btnVentas.Click
+        Form3.Show()
+        MenuPrincipal.Close()
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Me.Close()
+        MenuPrincipal.Show()
+    End Sub
+End Class
+•	--------------------------------CODIGO DE CLASES FUNCIONES
+Imports System.Data.SqlClient
+Public Class funcion
+    Inherits conexion
+    Dim cmd As New SqlCommand
+    Public Function validar(dts As datos) As Boolean
+        Try
+            Me.conectado()
+            cmd = New SqlCommand("validar")
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Connection = cnn
+            cmd.Parameters.AddWithValue("@usuario", dts.gusuario)
+            cmd.Parameters.AddWithValue("@contraseña", dts.gcontraseña)
+            Dim dr As SqlDataReader
+            dr = cmd.ExecuteReader
+            If dr.HasRows = True Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            Me.desconectado()
+        End Try
+    End Function
+End Class
+
+•	-----------------------------CODIGO DE CLASE DATOS
+Public Class datos
+    Dim usuario As String
+    Dim contraseña As String
+    Dim activo As Integer
+    Public Property gusuario()
+        Get
+            Return usuario
+        End Get
+        Set(value)
+            usuario = value
+        End Set
+    End Property
+    Public Property gcontraseña()
+        Get
+            Return contraseña
+        End Get
+        Set(value)
+            contraseña = value
+        End Set
+    End Property
+    'Public Property gActivo()
+    'Get
+    'Return activo
+    'End Get
+    'Set(value)
+    '       activo = value
+    'End Set
+    'End Property
+    Public Sub New(usuario As String, contraseña As String, activoE As Integer)
+        Me.gcontraseña = contraseña
+        Me.gusuario = usuario
+        'Me.gActivo = activo
+    End Sub
+    Public Sub New()
+    End Sub
+End Class
+
+
+
+
+
+
+
+•----------------------	CODIGO DE CLASE CONEXIÓN
+Imports System.Data.SqlClient
+Imports System.Data
+
+Public Class conexion
+    Protected cnn As New SqlConnection 'Var conexion'
+    Public comando As SqlCommand
+    Dim cadena As String = "Data Source=LAPTOP-CFDIFQP4\SQLEXPRESS01;" & "Initial Catalog=Farmacia_Proyecto;" & "Integrated Security= true"
+    Dim varconexion As New SqlConnection()
+    Protected Function conectado()
+        Try
+            cnn = New SqlConnection("Data Source=LAPTOP-CFDIFQP4\SQLEXPRESS01;Initial Catalog=Farmacia_Proyecto;Integrated Security=True")
+            cnn.Open()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Function
+
+    Protected Function desconectado()
+        Try
+            If cnn.State = ConnectionState.Open Then
+                cnn.Close()
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Function
+    Function Insertar(ByVal sql)
+        ' cnn = New SqlConnection("Data Source=LAPTOP-CFDIFQP4\SQLEXPRESS01;Initial Catalog=Farmacia_Proyecto;Integrated Security=True")
+        cnn.Open()
+        comando = New SqlCommand(sql, cnn)
+        Dim i As Integer = comando.ExecuteNonQuery()
+
+        If (i > 0) Then
+            Return True
+        Else
+            Return False
+        End If
+
+    End Function
+End Class

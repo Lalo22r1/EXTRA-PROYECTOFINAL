@@ -1,0 +1,213 @@
+' Gambas class file
+Public Sub btnAceptar_Click()
+
+  Dim $Query As String
+Dim $result As Result
+$Query = "SELECT * FROM Usuario WHERE Usuario='" & txtUsuario.Text & "'And contrasena ='" &
+txtContrasena.Text & "'"
+$result = $Con.Exec($Query)
+If $result.Count == 1 Then
+Menu1.Show
+txtContrasena.Text = ""
+txtUsuario.Text = ""
+FMain.Visible = False
+Else
+Message.Error("Problemas con el usuario o contrasena")
+Endif
+End
+Public $Con As New Connection 'definimos $Con como publica para poder ser usada en todos los módulos y formularios de esta aplicacion'
+Public Sub Conectar()
+$Con = Connections["Connection1"]
+$Con.Open() 'tenemos que a abrir la conexión
+If $Con = Null Then
+Message.error("Error al intentar conectarse a la base de datos")
+Endif
+End
+Public Sub Desconectar()
+$Con.Close()
+End
+Public Sub Form_Open()
+Conectar()
+End
+
+Public Sub Button1_Click()
+
+  Menu1.Show
+End
+
+FORMULARIO LOGIN------------------------------------------------------------------
+
+
+Public Sub btnAceptar_Click()
+
+  Dim $Query As String
+Dim $result As Result
+$Query = "SELECT * FROM Usuario WHERE Usuario='" & txtUsuario.Text & "'And contrasena ='" &
+txtContrasena.Text & "'"
+$result = $Con.Exec($Query)
+If $result.Count == 1 Then
+Menu1.Show
+txtContrasena.Text = ""
+txtUsuario.Text = ""
+FMain.Visible = False
+Else
+Message.Error("Problemas con el usuario o contrasena")
+Endif
+End
+Public $Con As New Connection 'definimos $Con como publica para poder ser usada en todos los módulos y formularios de esta aplicacion'
+Public Sub Conectar()
+$Con = Connections["Connection1"]
+$Con.Open() 'tenemos que a abrir la conexión
+If $Con = Null Then
+Message.error("Error al intentar conectarse a la base de datos")
+Endif
+End
+Public Sub Desconectar()
+$Con.Close()
+End
+Public Sub Form_Open()
+Conectar()
+End
+
+Public Sub Button1_Click()
+
+  Menu1.Show
+End
+
+CODIGO MENU----------------------------------------------------------------------
+
+Public Sub Run() As Boolean
+
+  Return Not Me.ShowModal()
+
+End
+
+Public Sub btnOK_Click()
+
+
+End
+
+Public Sub btnSalir_Click()
+  Me.Close
+  FMain.Visible = True
+
+End
+
+
+Public Sub btnVenta_Click()
+
+  FVenta.Show
+
+End
+
+Public Sub btnMedicamentos_Click()
+
+  FMedicamentos.Show
+
+End
+
+Public Sub btnProveedores_Click()
+
+  FProveedores.Show
+
+End
+
+Public Sub btnEmpleados_Click()
+
+  FEmpleados.Show
+
+End
+
+Public Sub Form_Open()
+
+  
+
+End
+
+CODIGO VENTAS------------------------------------------------------------------------
+
+Public Sub Run() As Boolean
+
+  Return Not Me.ShowModal()
+
+End
+
+Public Sub btnOK_Click()
+
+  Me.Close(True)
+
+End
+
+Public Sub btnCancel_Click()
+
+  Me.Close
+
+End
+
+
+Public Sub DataSource1_MouseDown()
+
+  
+
+End
+
+CODIGO EMPLEADOS ----------------------------------------------------------------------
+
+Public Sub Run() As Boolean
+
+  Return Not Me.ShowModal()
+
+End
+
+
+Public Sub Label1_MouseDown()
+
+  
+
+End
+
+Public Sub btnSalir_Click()
+Me.Close
+  
+
+End
+
+Public Sub DataSource1_MouseDown()
+
+  
+
+End
+
+CODIGO PROOVEDORES------------------------------------------------------------------------
+
+Public Sub Run() As Boolean
+
+  Return Not Me.ShowModal()
+
+End
+
+Public Sub btnOK_Click()
+
+  Me.Close(True)
+
+End
+
+Public Sub btnCancel_Click()
+
+  Me.Close
+
+End
+
+
+Public Sub btnSalir_Click()
+
+  Me.Close 
+
+End
+
+Public Sub DataSource1_MouseDown()
+
+  
+
+End
+
